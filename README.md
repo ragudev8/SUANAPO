@@ -1,27 +1,35 @@
-# Clinica Policial ANAPO
+# SUANAPO
 
-Sistema de gestion para digitalizar el flujo de atenciones medicas de la Clinica ANAPO.
+Sistema Unificado Academia Nacional de Policia.
 
-## Estado actual
+SUANAPO es una plataforma Laravel para centralizar modulos operativos de la Academia Nacional de Policia. El primer modulo funcional es Clinica ANAPO, y la arquitectura ya deja preparada la incorporacion de otras unidades como Soporte TI, administracion academica, docentes y auditoria.
 
-Este repositorio contiene una base Laravel 11 lista para instalar dependencias:
+## Modulos actuales
 
-- Migracion unificada con tablas del MVP.
-- Autenticacion local usando la tabla `usuarios`.
-- Seed inicial de especialidades, inventario de sangre y usuario administrador.
-- CRUD inicial de pacientes.
-- Registro de llegada y board de atenciones del dia.
-- Inventario inicial de medicamentos.
-- Servicios base para PDF, QR, auditoria y cambios pendientes offline.
+- Clinica ANAPO: pacientes, expedientes, llegadas, board de atenciones, preclinica, consultas, recetas, dispensacion, medicamentos, documentos medicos, sangre y reportes.
+- Administracion: usuarios, roles, permisos, auditoria e impersonacion para super admin.
+- Soporte TI: base inicial para dashboard, tickets, equipos y reportes.
+- Retroalimentacion: modulo para que usuarios propongan mejoras o reporten necesidades.
+
+## Funcionalidades destacadas
+
+- Roles para super admin, administrador, doctor, enfermeria, soporte TI, docente, administrativo academia, auditor y paciente.
+- Pacientes vinculables con usuarios del sistema.
+- Clasificacion de pacientes como civil o parte de la Policia.
+- Registro de llegada por tipo de consulta y servicio/especialidad.
+- Soporte para varias especialidades el mismo dia.
+- Reutilizacion de preclinica del dia cuando el paciente pasa a otra especialidad.
+- Inventario de medicamentos con descuento al dispensar recetas.
+- Reportes con datos calculados desde la base de datos.
+- Interfaz responsive para escritorio y movil.
 
 ## Requisitos
 
 - PHP 8.2 o superior.
 - Composer.
 - Node.js 20 o superior.
-- MariaDB 10.6 o SQLite para desarrollo rapido.
-
-En este equipo, al momento de crear el proyecto, `php`, `composer`, `node` y `git` no estaban disponibles en PATH.
+- MariaDB/MySQL.
+- Git.
 
 ## Instalacion local
 
@@ -29,10 +37,9 @@ En este equipo, al momento de crear el proyecto, `php`, `composer`, `node` y `gi
 composer install
 copy .env.example .env
 php artisan key:generate
-type nul > database\database.sqlite
-php artisan migrate --seed
 npm install
 npm run build
+php artisan migrate --seed
 php artisan serve
 ```
 
@@ -41,40 +48,77 @@ Credenciales iniciales:
 - Correo: `jefe@anapo.local`
 - Contrasena: `TemporalPassword123!`
 
-## MariaDB
+## Configuracion MariaDB
 
-Para usar MariaDB, edita `.env`:
+Edita `.env`:
 
 ```env
-DB_CONNECTION=mariadb
+DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=clinica_anapo_local
+DB_DATABASE=clinica_anapo
 DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-Luego crea la base:
+Crea la base de datos:
 
 ```sql
-CREATE DATABASE clinica_anapo_local CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE clinica_anapo CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
-y ejecuta:
+Ejecuta migraciones:
 
 ```bash
-php artisan migrate:fresh --seed
+php artisan migrate --force
 ```
 
-## Decisiones de normalizacion
+Para cargar datos de ejemplo:
 
-Los nombres fisicos de tablas y campos usan ASCII (`preclinicas`, `diagnosticos`, `examenes_medicos`) para evitar problemas entre Laravel, MariaDB, Windows y despliegues. La interfaz conserva los nombres en espanol para usuarios.
+```bash
+php artisan db:seed --class=DemoDataSeeder --force
+```
+
+## Despliegue
+
+Para produccion:
+
+```bash
+composer install --no-dev --optimize-autoloader
+npm run build
+php artisan migrate --force
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+```
+
+El dominio debe apuntar a la carpeta:
+
+```text
+public/
+```
+
+## Git
+
+Flujo recomendado:
+
+```bash
+git status
+git add .
+git commit -m "Descripcion del cambio"
+git push
+```
+
+## Notas tecnicas
+
+- El proyecto usa nombres fisicos ASCII para tablas y campos, por compatibilidad con Windows, Laravel y MariaDB.
+- La interfaz muestra textos en espanol para los usuarios.
+- `vendor`, `node_modules`, `.env`, logs y caches no deben subirse al repositorio.
 
 ## Proximas fases
 
-- Completar preclinica, consulta, diagnosticos y recetas con QR.
-- PDFs profesionales para receta, incapacidad, constancia y boleta de sangre.
-- Donacion, solicitud e inventario transaccional de sangre.
-- Reportes mensuales en PDF/Excel.
-- ACL granular con Spatie Permission.
-- Pruebas automatizadas del flujo completo.
+- Completar modulos de Soporte TI: tickets, inventario de equipos y reportes.
+- Crear modulos academicos para docentes y administracion academica.
+- Mejorar reportes PDF/Excel por unidad.
+- Fortalecer permisos por modulo y accion.
+- Agregar pruebas automatizadas para los flujos principales.
