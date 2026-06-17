@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 260" role="img" aria-labelledby="title desc">
+  <title id="title">Escudo ANAPO</title>
+  <desc id="desc">Logo institucional simplificado de la Academia Nacional de Policia de Honduras para uso en sistema.</desc>
+  <defs>
+    <linearGradient id="gold" x1="28" x2="192" y1="8" y2="244" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff1a6"/>
+      <stop offset=".42" stop-color="#d8aa3c"/>
+      <stop offset=".75" stop-color="#f5d978"/>
+      <stop offset="1" stop-color="#a96d10"/>
+    </linearGradient>
+  </defs>
+
+  <path fill="url(#gold)" stroke="#080808" stroke-width="5" d="M110 8c32 0 65 7 95 21v111c0 62-37 97-95 112-58-15-95-50-95-112V29c30-14 63-21 95-21Z"/>
+  <path fill="#ed1c24" stroke="#080808" stroke-width="4" d="M110 38c25 0 52 5 76 15v84c0 49-28 77-76 91-48-14-76-42-76-91V55c24-10 51-15 76-15Z"/>
+
+  <text x="110" y="29" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="17" font-weight="800" fill="#080808">HONDURAS</text>
+  <text x="110" y="57" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.2" font-weight="800" fill="#ffe26b">ACADEMIA NACIONAL DE POLICIA</text>
+
+  <g fill="#050505">
+    <path d="M103 70h14v100h-14z"/>
+    <path d="M85 94h50v17H85z"/>
+    <path d="M66 103h88v23H66z"/>
+  </g>
+
+  <rect x="70" y="96" width="80" height="21" rx="2" fill="#050505"/>
+  <text x="110" y="116" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="18" font-weight="800" letter-spacing="6" fill="#ffffff">ANAPO</text>
+
+  <g fill="none" stroke="#050505" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M64 126 43 174h42Z"/>
+    <path d="M156 126 135 174h42Z"/>
+    <path d="M64 126v48"/>
+    <path d="M156 126v48"/>
+  </g>
+
+  <g stroke="#050505" stroke-linejoin="round">
+    <path fill="#ffffff" stroke-width="3" d="M57 171c18-8 36-7 53 5v50c-17-12-35-13-53-5Z"/>
+    <path fill="#ffffff" stroke-width="3" d="M163 171c-18-8-36-7-53 5v50c17-12 35-13 53-5Z"/>
+    <path fill="none" stroke="#777" stroke-width="1.7" d="M68 184c12-3 23-2 33 3M68 195c12-3 23-2 33 3M68 206c12-3 23-2 33 3M152 184c-12-3-23-2-33 3M152 195c-12-3-23-2-33 3M152 206c-12-3-23-2-33 3"/>
+  </g>
+
+  <path fill="#f7f7f7" stroke="#050505" stroke-width="3" d="M103 127h14v97l-7 18-7-18Z"/>
+
+  <text x="110" y="246" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="13" font-weight="800" fill="#080808">FIAT JUSTITIA</text>
+</svg>
